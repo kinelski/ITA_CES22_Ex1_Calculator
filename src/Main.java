@@ -19,7 +19,8 @@ public class Main {
 		calc.insert(2);
 		calc.insert(Op.POW);
 		calc.insert(3);
-		System.out.println(calc.getPolish());
+		System.out.println(calc.getParent());
+		System.out.println(calc.computeAnswer());
 		
 		calc.clear();
 		
@@ -30,7 +31,8 @@ public class Main {
 		calc.insert(Op.SUM);
 		calc.insert(5);
 		calc.insert(Op.CLP);
-		System.out.println(calc.getPolish());
+		System.out.println(calc.getParent());
+		System.out.println(calc.computeAnswer());
 		
 	}
 }
