@@ -177,6 +177,8 @@ public class Calculator {
 					 
 					op_stack.pop();
 					break;
+					
+				default:
 				}
 			}
 		}
@@ -186,7 +188,8 @@ public class Calculator {
 	}
 	 
 	public void delete (){
-		parent.removeLast();
+		if (!parent.isEmpty())
+			parent.removeLast();
 	}
 	 
 	public void insert (Op op){
