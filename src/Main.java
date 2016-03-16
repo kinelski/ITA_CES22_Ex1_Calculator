@@ -5,19 +5,19 @@ public class Main {
 		Calculator calc = new Calculator();
 		
 		calc.insert(1);
-		calc.insert('+');
+		calc.insert(Op.SUM);
 		calc.insert(2);
 		System.out.println(calc.getParent());
 		
 		calc.clear();
 		
 		calc.insert(4);
-		calc.insert('*');
-		calc.insert('(');
+		calc.insert(Op.MUL);
+		calc.insert(Op.OPP);
 		calc.insert(3);
-		calc.insert('+');
+		calc.insert(Op.SUM);
 		calc.insert(5);
-		calc.insert(')');
+		calc.insert(Op.CLP);
 		System.out.println(calc.getParent());
 		
 	}

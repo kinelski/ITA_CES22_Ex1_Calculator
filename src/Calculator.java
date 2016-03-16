@@ -2,10 +2,10 @@ import java.util.*;
 
 class Union{
 	private boolean isNum;
-	private char op;
+	private Op op;
 	private double num;
 	
-	public Union (char op){
+	public Union (Op op){
 		isNum = false;
 		this.op = op;
 	}
@@ -15,7 +15,7 @@ class Union{
 		this.num = num;
 	}
 	
-	public char getOp (){
+	public Op getOp (){
 		return op;
 	}
 	
@@ -29,15 +29,29 @@ class Union{
 	
 	public String toString (){
 		if (isNum) return Double.toString(num);
-		else return Character.toString(op);
+		else {
+			switch (op){
+			case SUM: return "+";
+			case SUB: return "-";
+			case MUL: return "*";
+			case DIV: return "/";
+			case POW: return "^";
+			case OPP: return "(";
+			case CLP: return ")";
+			
+			default: return "";
+			}
+		}
 	}
 }
 
 public class Calculator {
 	 private LinkedList<Union> parent;
+	 private LinkedList<Union> polish;
 	 
 	 public Calculator (){
 		 parent = new LinkedList<Union>();
+		 polish = new LinkedList<Union>();
 	 }
 	 
 	 public String getParent (){
@@ -54,7 +68,7 @@ public class Calculator {
 		 parent.clear();
 	 }
 	 
-	 public void insert (char op){
+	 public void insert (Op op){
 		 parent.addLast(new Union(op));
 	 }
 	 
