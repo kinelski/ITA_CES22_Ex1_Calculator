@@ -3,10 +3,10 @@ public class CalculatorInput {
 	private double num;
 	private Calculator calc;
 	
-	public CalculatorInput (){
+	public CalculatorInput (Calculator calc){
 		typingNum = true;
 		num = 0;
-		calc = new Calculator();
+		this.calc = calc;
 	}
 	
 	public String digit (int alg){
