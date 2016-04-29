@@ -3,14 +3,14 @@ import java.util.*;
 class Union{
 	private boolean isNum;
 	private Op op;
-	private double num;
+	private int num;
 	
 	public Union (Op op){
 		isNum = false;
 		this.op = op;
 	}
 	
-	public Union (double num){
+	public Union (int num){
 		isNum = true;
 		this.num = num;
 	}
@@ -19,7 +19,7 @@ class Union{
 		return op;
 	}
 	
-	public double getNumber (){
+	public int getNumber (){
 		return num;
 	}
 	
@@ -28,7 +28,7 @@ class Union{
 	}
 	
 	public String toString (){
-		if (isNum) return Double.toString(num);
+		if (isNum) return Integer.toString(num);
 		else {
 			switch (op){
 			case SUM: return "+";
@@ -47,7 +47,7 @@ class Union{
 
 public class Calculator {
 	
-	private double ans;
+	private int ans;
 	private LinkedList<Union> parent;
 	private LinkedList<Union> polish;
 	 
@@ -57,10 +57,10 @@ public class Calculator {
 		polish = new LinkedList<Union>();
 	}
 	 
-	public double computeAnswer (){
-		double num1, num2;
+	public int computeAnswer (){
+		int num1, num2;
 		Iterator<Union> it;
-		Stack<Double> num_stack = new Stack<Double>();
+		Stack<Integer> num_stack = new Stack<Integer>();
 		Union union;
 		
 		computePolish();
@@ -96,7 +96,7 @@ public class Calculator {
 				case POW:
 					num2 = num_stack.pop();
 					num1 = num_stack.pop();
-					num_stack.push(Math.pow(num1, num2));
+					num_stack.push((int)Math.pow(num1, num2));
 					break;
 					
 				default:
@@ -196,7 +196,7 @@ public class Calculator {
 		parent.addLast(new Union(op));
 	}
 	 
-	public void insert (double num){
+	public void insert (int num){
 		parent.addLast (new Union(num));
 	}
 }

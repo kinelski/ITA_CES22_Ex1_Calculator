@@ -1,6 +1,6 @@
 public class CalculatorInput {
 	private boolean typingNum;
-	private double num;
+	private int num;
 	private Calculator calc;
 	
 	public CalculatorInput (){
@@ -38,7 +38,7 @@ public class CalculatorInput {
 			num = 0;
 			break;
 		case EQL:
-			return Double.toString(calc.computeAnswer());
+			return Integer.toString(calc.computeAnswer());
 			
 		default:
 		}
