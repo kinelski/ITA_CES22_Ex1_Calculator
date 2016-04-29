@@ -57,7 +57,7 @@ public class Calculator {
 		polish = new LinkedList<Union>();
 	}
 	 
-	public int computeAnswer (){
+	public int computeAnswer () throws ArithmeticException, Exception{
 		int num1, num2;
 		Iterator<Union> it;
 		Stack<Integer> num_stack = new Stack<Integer>();
@@ -91,11 +91,19 @@ public class Calculator {
 				case DIV:
 					num2 = num_stack.pop();
 					num1 = num_stack.pop();
+                                        
+                                        if (num2 == 0)
+                                            throw new ArithmeticException();
+                                        
 					num_stack.push(num1 / num2);
 					break;
 				case POW:
 					num2 = num_stack.pop();
 					num1 = num_stack.pop();
+                                        
+                                        if (num1 == 0 && num2 < 0)
+                                            throw new ArithmeticException();
+                                        
 					num_stack.push((int)Math.pow(num1, num2));
 					break;
 					
@@ -105,6 +113,8 @@ public class Calculator {
 		}
 		
 		ans = num_stack.peek();
+                parent.clear();
+                
 		return ans;
 	}
 	 
@@ -118,7 +128,7 @@ public class Calculator {
 		return s_parent;
 	}
 	 
-	public String getPolish (){
+	public String getPolish () throws Exception{
 		computePolish();
 		 
 		Iterator<Union> it = polish.iterator();
@@ -135,7 +145,7 @@ public class Calculator {
 	}
 	 
 	//Shunting-yard algorithm
-	private void computePolish (){
+	private void computePolish () throws Exception{
 		Iterator<Union> it = parent.iterator();
 		Stack<Union> op_stack = new Stack<Union>();
 		Union union;
@@ -172,8 +182,11 @@ public class Calculator {
 					break;
 					 
 				case CLP:
-					while (op_stack.peek().getOp() != Op.OPP)
-						polish.addLast(op_stack.pop());
+					while (op_stack.peek().getOp() != Op.OPP){
+                                            polish.addLast(op_stack.pop());
+                                            if (op_stack.isEmpty())
+                                                throw new Exception();
+                                        }
 					 
 					op_stack.pop();
 					break;
@@ -183,8 +196,13 @@ public class Calculator {
 			}
 		}
 		 
-		while (!op_stack.empty())
-			polish.addLast(op_stack.pop());
+		while (!op_stack.empty()){
+                    if (op_stack.peek().getOp() == Op.OPP ||
+                            op_stack.peek().getOp() == Op.CLP)
+                        throw new Exception();
+                    
+                    polish.addLast(op_stack.pop());
+                }
 	}
 	 
 	public void delete (){

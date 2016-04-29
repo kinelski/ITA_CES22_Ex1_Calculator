@@ -38,7 +38,16 @@ public class CalculatorInput {
 			num = 0;
 			break;
 		case EQL:
-			return Integer.toString(calc.computeAnswer());
+                        typingNum = false;
+                        try{
+                            return Integer.toString(calc.computeAnswer());
+                        } catch (ArithmeticException e){
+                            calc.clear();
+                            return "Erro: divisao por zero.";
+                        } catch (Exception e){
+                            calc.clear();
+                            return "Erro de sintaxe.";
+                        }
 			
 		default:
 		}
